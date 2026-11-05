@@ -1,0 +1,32 @@
+# Pinned == for reproducibility (08_ENGINEERING_STANDARDS §8).
+# On the CUDA training machine, install the matching CUDA build of the same
+# torch version (see requirements-optional.txt for the Windows iGPU/DirectML path).
+numpy==1.26.4
+scipy==1.13.1
+pandas==2.2.3
+pyarrow==23.0.1
+scikit-learn==1.5.2
+imbalanced-learn==0.12.4
+joblib==1.4.2
+torch==2.13.0
+shap==0.46.0
+lime==0.2.0.1
+matplotlib==3.9.2
+seaborn==0.13.2
+tqdm==4.66.5
+pyyaml==6.0.2
+python-dotenv==1.2.2
+kaggle==1.6.17
+pytest==9.1.1
+black==26.10.1
+ruff==0.6.9
+mypy==1.11.2
+types-PyYAML==6.0.12.20260815  # stubs for the yaml imports so `mypy` runs clean
+streamlit==1.66.1
+lightgbm==4.5.0  # deployed ensemble member (was missing)
+lief==0.17.2  # PE features for the malware file scan (src/soc/pefeatures.py)
+python-docx==1.1.2  # Word reports (src/soc/reports.py)
+cryptography==50.0.0  # HTTPS log receiver certificate (src/soc/collector.py)
+evtx==0.8.9  # .evtx files on macOS / Linux (src/soc/parsers.py)
+pillow>=13.0.0  # pentest re-check 2026-10-23: 35 advisories fixed in 13.0.0
+certifi>=2026.10.19

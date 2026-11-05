@@ -1,0 +1,36 @@
+# AUTO-WRITTEN follow-up config; registered design lives in ../E4_cut_depth.yaml
+id: C_E4_cut_depth
+description: 'CORRECTED follow-up of E4_cut_depth (owner 2026-10-14): verified DERIVED
+  formulas, pre-normalized guard, converged client-attribution probe. Attack stages
+  4/6/7 only; compare with registered E4_cut_depth.'
+dataset: cicids2017-improved
+label_schema: family9
+split: random
+subsample:
+  rare_floor: 5000
+  class_cap: 60000
+model:
+  hidden_layers: 4
+  hidden_width: 128
+  dropout: 0.2
+training:
+  scheme: split_sequential
+  clients: 4
+  dirichlet_alpha: 1.0
+sweep:
+  cut_depth:
+  - 1
+  - 2
+  - 3
+seeds:
+- 0
+- 1
+- 2
+- 3
+- 4
+attacks:
+- activation_inference
+corrections:
+- derived_v2
+- attribution_converge
+followup_of: E4_cut_depth

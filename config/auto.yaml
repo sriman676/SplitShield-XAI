@@ -1,0 +1,46 @@
+datasets:
+  fixture:
+    model:
+      hidden_layers: 2
+      hidden_width: 15
+      dropout: 0.11
+    provenance:
+      macro_f1: 0.022222222222222223
+      val_macro_f1: 0.028205128205128202
+      size_bytes: 5141
+  cic-iot-2023:
+    model:
+      hidden_layers: 3
+      hidden_width: 24
+      dropout: 0.1
+    provenance:
+      macro_f1: 0.6100749949822776
+      val_macro_f1: 0.6106501838350189
+      size_bytes: 12941
+  cic-iot-diad-2024:
+    model:
+      hidden_layers: 3
+      hidden_width: 96
+      dropout: 0.2
+    provenance:
+      macro_f1: 0.4696063340938139
+      val_macro_f1: 0.472998717627942
+      size_bytes: 110925
+  cicids2017-improved:
+    model:
+      hidden_layers: 3
+      hidden_width: 24
+      dropout: 0.1
+    provenance:
+      macro_f1: 0.8603768585389118
+      val_macro_f1: 0.9100767784871897
+      size_bytes: 16781
+  cicids2017-original:
+    model:
+      hidden_layers: 3
+      hidden_width: 24
+      dropout: 0.1
+    provenance:
+      macro_f1: 0.8825498841701667
+      val_macro_f1: 0.8667192408613974
+      size_bytes: 16717

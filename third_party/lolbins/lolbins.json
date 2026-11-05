@@ -1,0 +1,3644 @@
+{
+"built": "2026-10-24",
+"patterns": [
+{
+"os": "windows",
+"binary": "addinutil.exe",
+"switches": [
+"-addinroot"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "applaunch.exe",
+"switches": [
+"/activate"
+],
+"technique": "T1127.002",
+"what": "AWL Bypass",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "at.exe",
+"switches": [
+"/every",
+"/interactive"
+],
+"technique": "T1053.002",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "atbroker.exe",
+"switches": [
+"/start"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "bitsadmin.exe",
+"switches": [
+"/addfile",
+"/complete",
+"/create",
+"/resume",
+"/setnotifycmdline"
+],
+"technique": "T1564.004",
+"what": "ADS",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "bitsadmin.exe",
+"switches": [
+"/addfile",
+"/complete",
+"/create",
+"/resume"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "bitsadmin.exe",
+"switches": [
+"/addfile",
+"/complete",
+"/create",
+"/reset",
+"/resume"
+],
+"technique": "T1105",
+"what": "Copy",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "bitsadmin.exe",
+"switches": [
+"/addfile",
+"/create",
+"/reset",
+"/resume",
+"/setnotifycmdline"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certoc.exe",
+"switches": [
+"-loaddll"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certoc.exe",
+"switches": [
+"-getcacaps"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certreq.exe",
+"switches": [
+"-config",
+"-post"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certutil.exe",
+"switches": [
+"-urlcache"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certutil.exe",
+"switches": [
+"-verifyctl"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certutil.exe",
+"switches": [
+"-urlcache"
+],
+"technique": "T1564.004",
+"what": "ADS",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certutil.exe",
+"switches": [
+"-url"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certutil.exe",
+"switches": [
+"-encode"
+],
+"technique": "T1027.013",
+"what": "Encode",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certutil.exe",
+"switches": [
+"-decode"
+],
+"technique": "T1140",
+"what": "Decode",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "certutil.exe",
+"switches": [
+"-decodehex"
+],
+"technique": "T1140",
+"what": "Decode",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "cmdkey.exe",
+"switches": [
+"/list"
+],
+"technique": "T1078",
+"what": "Credentials",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "cmdl32.exe",
+"switches": [
+"/lan",
+"/vpn"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "cmstp.exe",
+"switches": [
+"/ni"
+],
+"technique": "T1218.003",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "cmstp.exe",
+"switches": [
+"/nf"
+],
+"technique": "T1218.003",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "conhost.exe",
+"switches": [
+"--headless"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "csc.exe",
+"switches": [
+"-target"
+],
+"technique": "T1127",
+"what": "Compile",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "desktopimgdownldr.exe",
+"switches": [
+"/eventname"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "dnscmd.exe",
+"switches": [
+"/config",
+"/serverlevelplugindll"
+],
+"technique": "T1543.003",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "esentutl.exe",
+"switches": [
+"/vss"
+],
+"technique": "T1003.003",
+"what": "Copy",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "ftp.exe",
+"switches": [
+"/payload.exe>>ftp.txt&@echo"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "gpscript.exe",
+"switches": [
+"/logon"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "gpscript.exe",
+"switches": [
+"/startup"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "ie4uinit.exe",
+"switches": [
+"-basesettings"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "ilasm.exe",
+"switches": [
+"/exe"
+],
+"technique": "T1127",
+"what": "Compile",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "ilasm.exe",
+"switches": [
+"/dll"
+],
+"technique": "T1127",
+"what": "Compile",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "installutil.exe",
+"switches": [
+"/logfile=",
+"/logtoconsole=false"
+],
+"technique": "T1218.004",
+"what": "AWL Bypass",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "mavinject.exe",
+"switches": [
+"/injectrunning"
+],
+"technique": "T1218.013",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "mavinject.exe",
+"switches": [
+"/injectrunning"
+],
+"technique": "T1564.004",
+"what": "ADS",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "mmc.exe",
+"switches": [
+"-embedding"
+],
+"technique": "T1218.014",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "mpcmdrun.exe",
+"switches": [
+"-downloadfile",
+"-path",
+"-url"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "mpcmdrun.exe",
+"switches": [
+"-downloadfile",
+"-path",
+"-url"
+],
+"technique": "T1564.004",
+"what": "ADS",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msdt.exe",
+"switches": [
+"-af",
+"-path",
+"/skip"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msdt.exe",
+"switches": [
+"/id",
+"/param",
+"/skip"
+],
+"technique": "T1202",
+"what": "AWL Bypass",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msedge.exe",
+"switches": [
+"--disable-gpu",
+"--dump-dom",
+"--enable-logging",
+"--headless"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msedge.exe",
+"switches": [
+"--disable-gpu-sandbox"
+],
+"technique": "T1218.015",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msiexec.exe",
+"switches": [
+"/quiet"
+],
+"technique": "T1218.007",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msiexec.exe",
+"switches": [
+"/qb"
+],
+"technique": "T1218.007",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msoxmled.exe",
+"switches": [
+"/verb"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "pcwrun.exe",
+"switches": [
+"/../../$(calc).exe"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "pktmon.exe",
+"switches": [
+"--etw"
+],
+"technique": "T1040",
+"what": "Reconnaissance",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "psr.exe",
+"switches": [
+"/gui",
+"/output",
+"/sc",
+"/start"
+],
+"technique": "T1113",
+"what": "Reconnaissance",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "rdrleakdiag.exe",
+"switches": [
+"/fullmemdmp",
+"/wait"
+],
+"technique": "T1003",
+"what": "Dump",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "rdrleakdiag.exe",
+"switches": [
+"/fullmemdmp",
+"/wait"
+],
+"technique": "T1003.001",
+"what": "Dump",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "rdrleakdiag.exe",
+"switches": [
+"/fullmemdmp",
+"/snap"
+],
+"technique": "T1003.001",
+"what": "Dump",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "register-cimprovider.exe",
+"switches": [
+"-path"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "rundll32.exe",
+"switches": [
+"-sta"
+],
+"technique": "T1218.011",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "runonce.exe",
+"switches": [
+"/alternateshellstartup"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "schtasks.exe",
+"switches": [
+"/create",
+"/mo",
+"/sc",
+"/tn",
+"/tr"
+],
+"technique": "T1053.005",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "schtasks.exe",
+"switches": [
+"/create",
+"/sc",
+"/tn",
+"/tr"
+],
+"technique": "T1053.005",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "scriptrunner.exe",
+"switches": [
+"-appvscript"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "scriptrunner.exe",
+"switches": [
+"-appvscript"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "settingsynchost.exe",
+"switches": [
+"-loadandrundiagscript"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "settingsynchost.exe",
+"switches": [
+"-loadandrundiagscriptnocab"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "tar.exe",
+"switches": [
+"-cf"
+],
+"technique": "T1564.004",
+"what": "ADS",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "tar.exe",
+"switches": [
+"-xf"
+],
+"technique": "T1564.004",
+"what": "ADS",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "tar.exe",
+"switches": [
+"-xf"
+],
+"technique": "T1105",
+"what": "Copy",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "ttdinject.exe",
+"switches": [
+"/clientparams",
+"/launch"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "ttdinject.exe",
+"switches": [
+"/clientparams",
+"/clientscenario",
+"/ddload",
+"/launch"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "tttracer.exe",
+"switches": [
+"-attach",
+"-dumpfull"
+],
+"technique": "T1003",
+"what": "Dump",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "unregmp2.exe",
+"switches": [
+"/hidewmp"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "vbc.exe",
+"switches": [
+"/target"
+],
+"technique": "T1127",
+"what": "Compile",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "vbc.exe",
+"switches": [
+"-reference"
+],
+"technique": "T1127",
+"what": "Compile",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "vssadmin.exe",
+"switches": [
+"/all",
+"/quiet"
+],
+"technique": "T1490",
+"what": "Tamper",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wbadmin.exe",
+"switches": [
+"-include",
+"-quiet"
+],
+"technique": "T1003.003",
+"what": "Dump",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wbadmin.exe",
+"switches": [
+"-items",
+"-itemtype",
+"-notrestoreacl",
+"-quiet",
+"-version"
+],
+"technique": "T1003.003",
+"what": "Dump",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "winget.exe",
+"switches": [
+"--manifest"
+],
+"technique": "T1105",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "winget.exe",
+"switches": [
+"--accept-package-agreements"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wmic.exe",
+"switches": [
+"/node"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wmic.exe",
+"switches": [
+"/namespace"
+],
+"technique": "T1518.001",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wuauclt.exe",
+"switches": [
+"/runhandlercomserver",
+"/updatedeploymentprovider"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "xwizard.exe",
+"switches": [
+"/taero"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msedge_proxy.exe",
+"switches": [
+"--disable-gpu-sandbox"
+],
+"technique": "T1218.015",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msedgewebview2.exe",
+"switches": [
+"--no-sandbox"
+],
+"technique": "T1218.015",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msedgewebview2.exe",
+"switches": [
+"--disable-gpu-sandbox"
+],
+"technique": "T1218.015",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "acccheckconsole.exe",
+"switches": [
+"-window"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "adplus.exe",
+"switches": [
+"-hang",
+"-pn",
+"-quiet"
+],
+"technique": "T1003.001",
+"what": "Dump",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "adplus.exe",
+"switches": [
+"-crash",
+"-sc"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "agentexecutor.exe",
+"switches": [
+"-powershell"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "appcert.exe",
+"switches": [
+"-apptype",
+"-reportoutputpath",
+"-setuppath"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "appcert.exe",
+"switches": [
+"-apptype",
+"-reportoutputpath",
+"-setupcommandline",
+"-setuppath"
+],
+"technique": "T1218.007",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "appvlp.exe",
+"switches": [
+"-comobject"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "bginfo.exe",
+"switches": [
+"/nolicprompt",
+"/popup"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "cdb.exe",
+"switches": [
+"-cf"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "cdb.exe",
+"switches": [
+"-pd",
+"-pn"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "dtutil.exe",
+"switches": [
+"/copy",
+"/file"
+],
+"technique": "T1105",
+"what": "Copy",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "dumpminitool.exe",
+"switches": [
+"--dumptype",
+"--file",
+"--processid"
+],
+"technique": "T1003.001",
+"what": "Dump",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "dxcap.exe",
+"switches": [
+"-usage"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "intellitrace.exe",
+"switches": [
+"/cp"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "mscopilot.exe",
+"switches": [
+"--disable-gpu-sandbox",
+"--no-startup-window",
+"/im"
+],
+"technique": "T1218.015",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "mscopilot_proxy.exe",
+"switches": [
+"--disable-gpu-sandbox",
+"--gpu-launcher",
+"--no-startup-window",
+"/im"
+],
+"technique": "T1218.015",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msdeploy.exe",
+"switches": [
+"-source",
+"-verb"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "msdeploy.exe",
+"switches": [
+"-verb"
+],
+"technique": "T1105",
+"what": "Copy",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "nmcap.exe",
+"switches": [
+"/capture",
+"/file",
+"/network"
+],
+"technique": "T1040",
+"what": "Reconnaissance",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "procdump.exe",
+"switches": [
+"-md"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "sqlps.exe",
+"switches": [
+"-noprofile"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "sqltoolsps.exe",
+"switches": [
+"-command",
+"-noprofile"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "squirrel.exe",
+"switches": [
+"--download"
+],
+"technique": "T1218",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "squirrel.exe",
+"switches": [
+"--update"
+],
+"technique": "T1218",
+"what": "AWL Bypass",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "teams.exe",
+"switches": [
+"--disable-gpu-sandbox"
+],
+"technique": "T1218.015",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "update.exe",
+"switches": [
+"--download"
+],
+"technique": "T1218",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "update.exe",
+"switches": [
+"--process-start-args",
+"--processstart"
+],
+"technique": "T1218",
+"what": "AWL Bypass",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "vshadow.exe",
+"switches": [
+"-nw"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wsb.exe",
+"switches": [
+"--config",
+"--id"
+],
+"technique": "T1564.006",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wsb.exe",
+"switches": [
+"--allow-write",
+"--id"
+],
+"technique": "T1564.006",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wsl.exe",
+"switches": [
+"/mnt/c/windows/system32/calc.exe"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wsl.exe",
+"switches": [
+"--exec"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "wsl.exe",
+"switches": [
+"--exec"
+],
+"technique": "T1105",
+"what": "Download",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "xbootmgr.exe",
+"switches": [
+"-callback",
+"-trace"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "xbootmgr.exe",
+"switches": [
+"-pretracecmd",
+"-trace"
+],
+"technique": "T1202",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "dotnet-counters.exe",
+"switches": [
+"--duration"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "dotnet-trace.exe",
+"switches": [
+"--duration"
+],
+"technique": "T1127",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "vsls-agent.exe",
+"switches": [
+"--agentextensionpath"
+],
+"technique": "T1218",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "cl_loadassembly.ps1",
+"switches": [
+"-command",
+"-ep",
+"-path"
+],
+"technique": "T1216",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "launch-vsdevshell.ps1",
+"switches": [
+"-ep",
+"-vswherepath"
+],
+"technique": "T1216",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "launch-vsdevshell.ps1",
+"switches": [
+"-ep",
+"-vsinstallationpath",
+"/../../../../../"
+],
+"technique": "T1216",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "utilityfunctions.ps1",
+"switches": [
+"-command",
+"-ep",
+"-path"
+],
+"technique": "T1216",
+"what": "Execute",
+"source": "LOLBAS"
+},
+{
+"os": "windows",
+"binary": "winrm.vbs",
+"switches": [
+"-format"
+],
+"technique": "T1220",
+"what": "AWL Bypass",
+"source": "LOLBAS"
+},
+{
+"os": "linux",
+"binary": "aa-exec",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ab",
+"switches": [
+"-v2"
+],
+"shell": null,
+"technique": "T1105",
+"what": "download",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "agetty",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "aoss",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "apt-get",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "aria2c",
+"switches": [
+"--on-download-error"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "aria2c",
+"switches": [
+"--allow-overwrite",
+"--gid",
+"--on-download-complete"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "at",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bash",
+"switches": [
+"-ne"
+],
+"shell": "sh -c",
+"technique": "T1105",
+"what": "download",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bash",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1105",
+"what": "download",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bash",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1574",
+"what": "library-load",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bash",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bash",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bash",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "borg",
+"switches": [
+"--rsh"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bpftrace",
+"switches": [
+"--unsafe"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bpftrace",
+"switches": [
+"--unsafe"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bpftrace",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "bundle",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "busctl",
+"switches": [
+"--address",
+"/org/freedesktop/systemd1"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "busctl",
+"switches": [
+"--address"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "busybox",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "busybox",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "cabal",
+"switches": [
+"--project-file"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "cdist",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "certbot",
+"switches": [
+"--agree-tos",
+"--config-dir",
+"--dry-run",
+"--email",
+"--logs-dir",
+"--pre-hook",
+"--standalone",
+"--work-dir"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "check_by_ssh",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "check_ssl_cert",
+"switches": [
+"--grep-bin"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "choom",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "chown",
+"switches": [
+"-gn",
+"-un)"
+],
+"shell": null,
+"technique": "T1548",
+"what": "privilege-escalation",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "chrt",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "clisp",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "cobc",
+"switches": [
+"--frelax-syntax-checks",
+"-xfj"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "code",
+"switches": [
+"--name"
+],
+"shell": null,
+"technique": "T1105",
+"what": "download",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "code",
+"switches": [
+"--name"
+],
+"shell": null,
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "code",
+"switches": [
+"--name"
+],
+"shell": null,
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "code",
+"switches": [
+"--name"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "codex",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "cp",
+"switches": [
+"--attributes-only",
+"--preserve"
+],
+"shell": null,
+"technique": "T1548",
+"what": "privilege-escalation",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "cpio",
+"switches": [
+"--rsh-command"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "cpulimit",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "csvtool",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ctr",
+"switches": [
+"--mount",
+"--rm"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "curl",
+"switches": [
+"--engine"
+],
+"shell": null,
+"technique": "T1574",
+"what": "library-load",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "curl",
+"switches": [
+"--data-binary"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "dc",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "dhclient",
+"switches": [
+"-sf"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "distcc",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "dnf",
+"switches": [
+"--disablerepo"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "dnsmasq",
+"switches": [
+"--conf-script"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "doas",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "docker",
+"switches": [
+"--rm",
+"-it",
+"/mnt"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "docker",
+"switches": [
+"--privileged",
+"--rm",
+"-it"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "dvips",
+"switches": [
+"-r0"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "easyrsa",
+"switches": [
+"--vars"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "emacs",
+"switches": [
+"--eval",
+"-nw"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "enscript",
+"switches": [
+"-qo"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "env",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ex",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "expect",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ffmpeg",
+"switches": [
+"-af"
+],
+"shell": null,
+"technique": "T1574",
+"what": "library-load",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "find",
+"switches": [
+"-exec",
+"-quit"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "firejail",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "flock",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "forge",
+"switches": [
+"--use"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "fzf",
+"switches": [
+"--listen"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "fzf",
+"switches": [
+"--bind"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "gawk",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "gcc",
+"switches": [
+"-wrapper"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "gdb",
+"switches": [
+"-ex",
+"-nx"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "gem",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "genie",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ghc",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "git",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "gnuplot",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "grc",
+"switches": [
+"--pty"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "guile",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "hg",
+"switches": [
+"--config"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "hping3",
+"switches": [
+"--data",
+"--file",
+"--icmp",
+"--sign"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ionice",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "jrunscript",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "jtag",
+"switches": [
+"--interactive"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "julia",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ksu",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "kubectl",
+"switches": [
+"--kubeconfig"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "kubectl",
+"switches": [
+"--address",
+"--port",
+"--www",
+"--www-prefix"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "latex",
+"switches": [
+"--shell-escape"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "latexmk",
+"switches": [
+"-pdf",
+"-pdflatex"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ld.so",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "less",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "lftp",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ln",
+"switches": [
+"-fs"
+],
+"shell": "/bin/sh",
+"technique": "T1548",
+"what": "privilege-escalation",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "logsave",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ltrace",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "lua",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "m4",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "mail",
+"switches": [
+"--exec"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "make",
+"switches": [
+"--eval"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "man",
+"switches": [
+"-h/bin/sh"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "mawk",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "mount",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1548",
+"what": "privilege-escalation",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "msgfilter",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "multitime",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "mysql",
+"switches": [
+"--default-auth"
+],
+"shell": null,
+"technique": "T1574",
+"what": "library-load",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "mysql",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "nano",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "nc",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "bind-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "nc",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "bind-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "neofetch",
+"switches": [
+"--config"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "nice",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "nmap",
+"switches": [
+"--interactive"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "node",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "bind-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "node",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "bind-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "nohup",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "npm",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "nsenter",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "octave",
+"switches": [
+"--eval"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "openssl",
+"switches": [
+"-connect",
+"-quiet"
+],
+"shell": null,
+"technique": "T1105",
+"what": "download",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "openssl",
+"switches": [
+"-engine"
+],
+"shell": null,
+"technique": "T1574",
+"what": "library-load",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "openssl",
+"switches": [
+"-connect",
+"-quiet"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "openssl",
+"switches": [
+"-connect",
+"-quiet"
+],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "openssl",
+"switches": [
+"-connect",
+"-quiet"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "openvpn",
+"switches": [
+"--dev",
+"--script-security",
+"--up"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "pdflatex",
+"switches": [
+"--shell-escape"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "pdftex",
+"switches": [
+"--shell-escape"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "perf",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "perl",
+"switches": [
+"-mio"
+],
+"shell": null,
+"technique": "T1105",
+"what": "download",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "perl",
+"switches": [
+"-i\");}"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "perl",
+"switches": [
+"-i\");}"
+],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "perl",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "perl",
+"switches": [
+"-mio"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "perlbug",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "pexec",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "php",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "php",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "php",
+"switches": [
+"-i\",\"r"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "pidstat",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "pip",
+"switches": [
+"--editor"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "pkexec",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "pkg",
+"switches": [
+"--no-repo-update"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "plymouth",
+"switches": [
+"--command",
+"--prompt"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "podman",
+"switches": [
+"--privileged",
+"--rm",
+"--volume",
+"-it",
+"/mnt"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "puppet",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "python",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "restic",
+"switches": [
+"--password-command"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "restic",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "restic",
+"switches": [
+"--password-command"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "rlwrap",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "rpm",
+"switches": [
+"-ivh"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "rpm",
+"switches": [
+"--eval"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "rpm",
+"switches": [
+"--pipe"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "rpmdb",
+"switches": [
+"--eval"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "rpmquery",
+"switches": [
+"--eval"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "rpmverify",
+"switches": [
+"--eval"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "rsync",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ruby",
+"switches": [
+"-rsocket"
+],
+"shell": null,
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ruby",
+"switches": [
+"-rsocket"
+],
+"shell": null,
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ruby",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ruby",
+"switches": [
+"-run"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "run-parts",
+"switches": [
+"--new-session",
+"--regex"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "scp",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "scrot",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "sed",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "service",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "setarch",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "setfacl",
+"switches": [
+"-un)"
+],
+"shell": null,
+"technique": "T1548",
+"what": "privilege-escalation",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "setlock",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "sg",
+"switches": [
+"-ng"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "slsh",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "snap",
+"switches": [
+"--dangerous",
+"--devmode"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "socat",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "bind-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "socat",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "bind-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "socket",
+"switches": [
+"-svp"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "bind-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "socket",
+"switches": [
+"-svp"
+],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "bind-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "socket",
+"switches": [
+"-qvp"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "socket",
+"switches": [
+"-qvp"
+],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "softlimit",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "split",
+"switches": [
+"--filter"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "sqlite3",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ssh",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "ssh-agent",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "sshpass",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "sshuttle",
+"switches": [
+"--ssh-cmd"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "start-stop-daemon",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "stdbuf",
+"switches": [
+"-i0"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "strace",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "su",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "sudo",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "systemd-run",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tailscale",
+"switches": [
+"--http"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tar",
+"switches": [
+"--rsh-command"
+],
+"shell": null,
+"technique": "T1105",
+"what": "download",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tar",
+"switches": [
+"--checkpoint",
+"--checkpoint-action"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tar",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tar",
+"switches": [
+"--rsh-command"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "task",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "taskset",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tcpdump",
+"switches": [
+"-ln"
+],
+"shell": null,
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "telnet",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "telnet",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tex",
+"switches": [
+"--shell-escape"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "time",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "timeout",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tmate",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "tmux",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "torify",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "torsocks",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "unshare",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "uv",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "valgrind",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "vi",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "virsh",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1059",
+"what": "command",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "watch",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "wget",
+"switches": [
+"--use-askpass"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "wget",
+"switches": [
+"--post-file"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "wget",
+"switches": [
+"--post-data"
+],
+"shell": null,
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "xargs",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "xdg-user-dir",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "xdotool",
+"switches": [
+"--sync"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "yarn",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "yarn",
+"switches": [
+"--cwd"
+],
+"shell": null,
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "yt-dlp",
+"switches": [
+"--exec"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "zip",
+"switches": [
+"-tt"
+],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "zsh",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1105",
+"what": "download",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "zsh",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1059",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "zsh",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1071",
+"what": "reverse-shell",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "zsh",
+"switches": [],
+"shell": "sh -c",
+"technique": "T1041",
+"what": "upload",
+"source": "GTFOBins"
+},
+{
+"os": "linux",
+"binary": "zypper",
+"switches": [],
+"shell": "/bin/sh",
+"technique": "T1059",
+"what": "shell",
+"source": "GTFOBins"
+}
+]
+}

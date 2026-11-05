@@ -1,0 +1,34 @@
+# PRE-REGISTERED H2b (docs/PREREG_H2b.md). Same design as C_E4_cut_depth; only id and seeds differ.
+id: H2b_E4_cut_depth
+description: 'PRE-REGISTERED H2b (docs/PREREG_H2b.md, committed before any run): H2 on the corrected pipeline of C_E4_cut_depth, NEW seeds 5-9. Attack stages 4/6/7.'
+dataset: cicids2017-improved
+label_schema: family9
+split: random
+subsample:
+  rare_floor: 5000
+  class_cap: 60000
+model:
+  hidden_layers: 4
+  hidden_width: 128
+  dropout: 0.2
+training:
+  scheme: split_sequential
+  clients: 4
+  dirichlet_alpha: 1.0
+sweep:
+  cut_depth:
+  - 1
+  - 2
+  - 3
+seeds:
+- 5
+- 6
+- 7
+- 8
+- 9
+attacks:
+- activation_inference
+corrections:
+- derived_v2
+- attribution_converge
+followup_of: E4_cut_depth

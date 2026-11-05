@@ -1,0 +1,19 @@
+id: T1_temporal
+description: Time-ordered test on CIC-IDS2017 (TrafficLabelling export with timestamps) - train on earlier traffic, test on later traffic. Owner 2026-10-13.
+dataset: cicids2017-flows
+label_schema: family9
+split: temporal        # oldest 70% train, next 15% val, newest 15% test; no shuffling
+subsample:
+  rare_floor: 5000
+  class_cap: 60000
+model:
+  hidden_layers: 4
+  hidden_width: 128
+  dropout: 0.2
+training:
+  scheme: split_sequential
+  clients: 4
+  dirichlet_alpha: 1.0
+seeds: [0, 1, 2]
+stages: [1, 2]         # baselines + the four training schemes; attacks covered by E4/H5
+improve: false         # same traffic as H5; used only for the time-ordered test

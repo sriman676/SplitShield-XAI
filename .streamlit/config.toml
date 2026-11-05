@@ -1,0 +1,22 @@
+# owner 2026-10-14: dashboard reachable from this PC only
+[server]
+address = "localhost"
+headless = true
+# owner 2026-10-14: whole datasets can be dragged in (MB; 100 GB = effectively no limit)
+maxUploadSize = 102400
+
+[browser]
+gatherUsageStats = false
+
+# owner 2026-10-16: no Deploy button / developer menu for analysts
+[client]
+toolbarMode = "minimal"
+
+# owner 2026-10-16 redesign: calm, readable theme (blue accent instead of default red)
+[theme]
+base = "light"
+primaryColor = "#2563EB"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F4F6F9"
+textColor = "#1F2937"
+font = "sans serif"

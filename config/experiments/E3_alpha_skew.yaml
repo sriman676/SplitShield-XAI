@@ -1,0 +1,19 @@
+id: E3_alpha_skew
+description: Training scheme × label skew — macro-F1 vs Dirichlet α, four arms (H4)
+dataset: cicids2017-improved
+label_schema: family9
+split: random
+subsample:
+  rare_floor: 5000
+  class_cap: 60000
+model:
+  hidden_layers: 4
+  hidden_width: 128
+  dropout: 0.2
+training:
+  clients: 4
+# The matrix driver (run_matrix.py) sweeps these axes; each cell is `seeds` runs.
+matrix:
+  scheme: [centralized, split_sequential, fedavg, splitfed]
+  dirichlet_alpha: [10.0, 1.0, 0.1]
+seeds: [0, 1, 2, 3, 4]

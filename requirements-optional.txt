@@ -1,0 +1,16 @@
+# Optional. Every import of these is guarded by try/except ImportError; absence
+# must not break Tasks 0-10.
+xgboost==2.1.1
+lightgbm==4.5.0
+
+# Windows iGPU (DirectML) backend. Pin torch to a version with a matching
+# torch-directml wheel; keep it aligned with requirements.txt torch version.
+# torch-directml==0.2.5.dev240914
+
+# Only if the GNN (Tier 3) is ever attempted.
+# torch-geometric==2.6.1
+
+# Live network capture for assistant.py --live (needs Npcap on Windows / libpcap on
+# Linux + admin/root). Replay mode works without these. Guarded import.
+cicflowmeter==0.1.6
+scapy==2.8.0

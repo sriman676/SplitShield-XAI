@@ -1,0 +1,25 @@
+# Local Splunk for the real-SIEM check (owner 2026-10-14). Runs ONLY on this PC.
+# Prerequisites (after the training run): Docker Desktop installed, then in
+# deploy_siem/.env set (you, not Claude, accept Splunk's terms):
+#   SPLUNK_PASSWORD=<admin password, 8+ chars>
+#   SPLUNK_HEC_TOKEN=<any UUID, e.g. from [guid]::NewGuid()>
+#   SPLUNK_START_ARGS=--accept-license
+#   SPLUNK_GENERAL_TERMS=--accept-sgt-current-at-splunk-com
+# Start:  docker compose -f deploy_siem/docker-compose.splunk.yml --env-file deploy_siem/.env up -d
+# Check:  .venv\Scripts\python.exe -m scripts.siem_live_check splunk
+# Stop:   docker compose -f deploy_siem/docker-compose.splunk.yml down
+services:
+  splunk:
+    image: splunk/splunk:9.3.2
+    container_name: splitshield-splunk
+    environment:
+      SPLUNK_START_ARGS: ${SPLUNK_START_ARGS}
+      SPLUNK_GENERAL_TERMS: ${SPLUNK_GENERAL_TERMS}
+      SPLUNK_PASSWORD: ${SPLUNK_PASSWORD}
+      SPLUNK_HEC_TOKEN: ${SPLUNK_HEC_TOKEN}
+      SPLUNK_HEC_SSL: "false"  # plain HTTP on localhost only
+    ports:
+      - "127.0.0.1:8000:8000"  # web UI
+      - "127.0.0.1:8088:8088"  # HTTP Event Collector
+      - "127.0.0.1:8089:8089"  # REST API (search check)
+    mem_limit: 4g

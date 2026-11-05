@@ -1,0 +1,20 @@
+id: smoke
+description: Tiny end-to-end path on fixtures; exercises every stage under --fast
+dataset: fixture
+label_schema: family9
+split: random
+subsample:
+  rare_floor: 50
+  class_cap: 200
+model:
+  hidden_layers: 4
+  hidden_width: 16
+  dropout: 0.2
+training:
+  scheme: split_sequential
+  clients: 4
+  dirichlet_alpha: 1.0
+sweep:
+  cut_depth: [1, 2, 3]
+seeds: [0]
+attacks: [random_matched, fgsm_pgd, gan_attack, activation_inference, client_attribution]

@@ -1,0 +1,28 @@
+[project]
+name = "splitshield-xai"
+version = "1.0.0"
+description = "Explainable detection and response companion for SIEMs, with a split-learning security study"
+requires-python = ">=3.12"
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "UP"]
+ignore = ["E501"]  # black owns line length
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.mypy]
+python_version = "3.12"
+files = ["config", "src", "utils", "scripts", "tests", "*.py"]  # never .venv/data
+ignore_missing_imports = true
+warn_unused_ignores = true
+# non-strict: warning gate in CI (08_ENGINEERING_STANDARDS §1)

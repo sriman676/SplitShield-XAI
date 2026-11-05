@@ -1,0 +1,38 @@
+# AUTO-WRITTEN follow-up config; registered design lives in ../E8_netflow.yaml
+id: C_E8_netflow
+description: 'CORRECTED follow-up of E8_netflow (owner 2026-10-14): verified DERIVED
+  formulas, pre-normalized guard, converged client-attribution probe. Attack stages
+  4/6/7 only; compare with registered E8_netflow.'
+dataset: nf-cse-cic-ids2018-v2
+label_schema: binary
+split: random
+subsample:
+  rare_floor: 5000
+  class_cap: 60000
+model:
+  hidden_layers: 4
+  hidden_width: 128
+  dropout: 0.2
+training:
+  scheme: split_sequential
+  clients: 4
+  dirichlet_alpha: 1.0
+sweep:
+  cut_depth:
+  - 1
+  - 2
+  - 3
+seeds:
+- 0
+- 1
+- 2
+attacks:
+- random_matched
+- fgsm_pgd
+- gan_attack
+- activation_inference
+- client_attribution
+corrections:
+- derived_v2
+- attribution_converge
+followup_of: E8_netflow

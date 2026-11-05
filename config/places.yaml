@@ -1,0 +1,34 @@
+# Place profiles (owner 2026-10-15): alerting adapts to where the SOC runs.
+#
+# A profile only changes HOW MUCH is pushed and how strongly linked findings raise
+# severity - never what is detected. Every alert stays visible on the dashboard.
+#   board_scale          multiplies the validated risk-board weight (clamped to 0..1:
+#                        a profile can soften the validated escalation, never exceed it)
+#   notify_min_severity  incidents at or above this are forwarded to the SIEM / pop-ups
+#   max_pushes_per_day   daily budget for forwarded incidents; CRITICAL incidents
+#                        (severity >= 8) are always forwarded, whatever the budget
+#   description          shown on the dashboard
+
+home_pc:
+  description: One personal computer; few users; quiet - every serious alert matters.
+  board_scale: 1.0
+  notify_min_severity: 6
+  max_pushes_per_day: 20
+
+small_office:
+  description: Several PCs and users behind one network; more background noise.
+  board_scale: 1.0
+  notify_min_severity: 6
+  max_pushes_per_day: 50
+
+server:
+  description: Web / mail / application server exposed to the internet; constant scanning.
+  board_scale: 1.0
+  notify_min_severity: 7
+  max_pushes_per_day: 100
+
+lab:
+  description: Test lab or replayed attack datasets; lots of attack traffic on purpose.
+  board_scale: 0.5
+  notify_min_severity: 8
+  max_pushes_per_day: 20

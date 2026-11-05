@@ -1,0 +1,20 @@
+id: R1_ciciot2023
+description: CIC-IoT-2023 (recency arm, native 8-class) — full stages
+dataset: cic-iot-2023
+label_schema: ciot
+split: random
+subsample:
+  rare_floor: 5000
+  class_cap: 60000
+model:
+  hidden_layers: 4
+  hidden_width: 128
+  dropout: 0.2
+training:
+  scheme: split_sequential
+  clients: 4
+  dirichlet_alpha: 1.0
+sweep:
+  cut_depth: [1, 2, 3]
+seeds: [0, 1, 2]
+attacks: [random_matched, fgsm_pgd, gan_attack, activation_inference, client_attribution]

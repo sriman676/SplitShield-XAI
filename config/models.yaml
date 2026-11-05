@@ -1,0 +1,111 @@
+# Model registry (owner 2026-10-15): every specialist model the SOC runs.
+#
+# The self-improvement controller, the health page, the shared risk board, the inbox
+# and the model cards read this file - adding a model means adding an entry here
+# (``python -m scripts.new_model <name>`` writes a template module + entry + test).
+#
+# Fields
+#   title      shown on the dashboard
+#   family     risk-board family: findings from DIFFERENT families about the same
+#              entity corroborate each other (network, endpoint, web, auth, ids,
+#              cloud, phishing, malware, insider, ics, intel, assistant)
+#   files      what a snapshot copies before an update (paths relative to the project)
+#   speed      "module:function" -> items per second on fixed probe data
+#   unit       unit of that speed
+#   inbox      file pattern learned from artifacts/inbox/<name>/ (omit: no inbox)
+#   learn      "module:function" taking the inbox file path -> result dict
+#   entities   entity types its findings are about (ip, user, host, url, domain, file)
+#   inputs     one line for people: what to drop in the inbox
+
+flow:
+  title: Flow detector (CICFlowMeter)
+  family: network
+  files: [artifacts/deploy]
+  speed: src.soc.controller:_speed_flow
+  unit: flows/s
+  inbox: "*.csv"
+  learn: src.soc.controller:_learn_flow
+  entities: [ip]
+  inputs: CICFlowMeter CSV with a Label column
+
+netflow:
+  title: NetFlow detector
+  family: network
+  files: [artifacts/deploy_netflow]
+  speed: src.soc.controller:_speed_netflow
+  unit: flows/s
+  inbox: "*.csv"
+  learn: src.soc.controller:_learn_netflow
+  entities: [ip]
+  inputs: NetFlow v9 CSV with a Label column (0/1 or names)
+
+zeek:
+  title: Zeek connection model
+  family: network
+  files: [artifacts/zeekml]
+  speed: src.soc.controller:_speed_zeek
+  unit: connections/s
+  inbox: "*.log"
+  learn: src.soc.controller:_learn_zeek
+  entities: [ip]
+  inputs: labelled Zeek conn.log (IoT-23 style label field)
+
+phishing:
+  title: Phishing URL model
+  family: phishing
+  files: [artifacts/mlareas/phishing/current]
+  speed: src.soc.controller:_speed_phishing
+  unit: URLs/s
+  inbox: "*.csv"
+  learn: src.soc.controller:_learn_phishing
+  entities: [url, domain, user]
+  inputs: CSV with url,label (1 = phishing)
+
+malware:
+  title: Malware file model
+  family: malware
+  files: [artifacts/mlareas/malware]
+  speed: src.soc.controller:_speed_malware
+  unit: files/s
+  inbox: "*.jsonl"
+  learn: src.soc.controller:_learn_malware
+  entities: [file, host]
+  inputs: EMBER feature JSONL with label 0/1
+
+ics:
+  title: ICS anomaly model
+  family: ics
+  files: [artifacts/mlareas/ics/current]
+  speed: src.soc.controller:_speed_ics
+  unit: sensor rows/s
+  inbox: "*.csv"
+  learn: src.soc.controller:_learn_ics
+  entities: [host]
+  inputs: plant sensor CSV at 1 Hz (normal rows are learned)
+
+insider:
+  title: Insider-threat model
+  family: insider
+  files: [artifacts/mlareas/insider/current, artifacts/mlareas/insider/data]
+  speed: src.soc.controller:_speed_insider
+  unit: user-days/s
+  inbox: "*.csv"
+  learn: src.soc.controller:_learn_insider
+  entities: [user]
+  inputs: user-day feature CSV with a label column
+
+intent:
+  title: Question understanding (assistant)
+  family: assistant
+  files: [artifacts/nlp/intent.joblib]
+  speed: src.soc.controller:_speed_intent
+  unit: questions/s
+  entities: []
+
+shieldlm:
+  title: ShieldLM narrative model
+  family: assistant
+  files: [artifacts/nlp/shieldlm_deployed.pt, artifacts/nlp/reward.pt, artifacts/nlp/tokenizer.json]
+  speed: src.soc.controller:_speed_shieldlm
+  unit: tokens/s
+  entities: []

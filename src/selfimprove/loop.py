@@ -1,0 +1,477 @@
+"""Self-improvement loop: one run searches for a smaller-yet-as-good detector.
+
+Layers (all reproducible; core pipeline source is NEVER edited):
+  A  model  : train teacher -> distil into searched narrower students -> quantise;
+              promote the best that clears the accuracy floor AND the size budget.
+  B  config : write the winner's arch to config/auto.yaml (git-tracked), used as
+              the next run's search centre.
+  C  code   : emit models/generated/arch_<hash>.py from a template (syntax-checked,
+              git-committed). A losing/broken candidate is never promoted.
+
+Promotion is gated: a candidate must pass the shuffled-label sanity check (macro-F1
+collapses to the prior when labels are shuffled — else the pipeline leaks) and beat
+the standing best on macro-F1 within the size budget. Everything is appended to a
+leaderboard so improvement across runs is auditable.
+"""
+
+from __future__ import annotations
+
+import json
+import subprocess
+import time
+from dataclasses import replace
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+import yaml
+
+from config.base import Config, build_config, config_hash, experiment_for_dataset
+from src.data.preprocess import ProcessedData, preprocess_frame
+from src.data.sources import get_spec, load_raw
+from src.selfimprove.compress import (
+    distill_to_width,
+    dynamic_quantize,
+    latency_ms,
+    state_dict_bytes,
+)
+from src.selfimprove.extensions import continual_update, unsupervised_pretrain
+from src.selfimprove.rl import GradientBanditController
+from src.selfimprove.search import sample_archs
+from src.training.centralized import predict, train_centralized
+from src.training.common import eval_macro_f1
+from utils.logging_config import get_logger
+from utils.paths import CONFIG_DIR
+
+_log = get_logger(__name__)
+
+ROOT = CONFIG_DIR.parent
+ARTIFACTS = ROOT / "artifacts" / "best"
+GENERATED = ROOT / "models" / "generated"
+LEADERBOARD = ROOT / "artifacts" / "leaderboard.json"
+AUTO_YAML = CONFIG_DIR / "auto.yaml"
+
+
+def best_dir(dataset: str) -> Path:
+    """Promoted artifacts for one dataset (weights only fit that feature schema)."""
+    return ARTIFACTS / dataset
+
+
+def _load_data(cfg: Config) -> ProcessedData:
+    spec = get_spec(cfg.dataset)
+    return preprocess_frame(load_raw(spec), spec, cfg, seed=cfg.seed)
+
+
+def shuffled_label_ok(
+    data: ProcessedData, cfg: Config, device: str, margin: float = 0.15
+) -> tuple[bool, float]:
+    """Train on shuffled labels; macro-F1 must collapse toward the prior.
+
+    Returns (passed, shuffled_macro_f1). If a model still scores well with the
+    labels destroyed, the pipeline leaks and nothing should be promoted (09_TASKS).
+    """
+    rng = np.random.default_rng(cfg.seed)
+    shuffled = replace(data, y_train=rng.permutation(data.y_train))
+    _, _, m = train_centralized(shuffled, replace(cfg, seed=cfg.seed), device)
+    prior = 1.0 / max(1, len(data.label_names))
+    f1 = float(m["macro_f1"])
+    return f1 <= prior + margin, f1
+
+
+def validate_output(
+    model: Any,
+    data: ProcessedData,
+    cfg: Config,
+    device: str,
+    floor: float,
+    gate_ok: bool,
+    shuffled_f1: float,
+) -> tuple[bool, dict[str, Any]]:
+    """Full post-RL validation gate: is the model's OUTPUT usable, not just small?
+
+    Checks, all of which must hold to accept: logits finite (no NaN/Inf),
+    predictions well-formed (right count, every label in range), macro-F1 at or
+    above the accuracy floor, and the shuffled-label leak check passed. Reuses the
+    already-computed ``gate_ok``/``shuffled_f1`` so it costs no extra training.
+    """
+    import torch
+
+    n_classes = len(data.label_names)
+    with torch.no_grad():
+        logits = model(torch.as_tensor(data.X_test, dtype=torch.float32, device=device))
+        finite = bool(torch.isfinite(logits).all().item())
+    pred = predict(model, data.X_test, device)
+    f1 = eval_macro_f1(model, data.X_test, data.y_test, n_classes, device)
+    vf1 = eval_macro_f1(model, data.X_val, data.y_val, n_classes, device)
+    checks = {
+        "finite_logits": finite,
+        "shape_ok": int(pred.shape[0]) == int(len(data.y_test)),
+        "preds_in_label_set": bool(((pred >= 0) & (pred < n_classes)).all()),
+        "macro_f1_ge_floor": bool(vf1 >= floor),  # floor is on validation F1
+        "no_leak": bool(gate_ok),
+    }
+    report = {
+        "checks": checks,
+        "macro_f1": float(f1),
+        "val_macro_f1": float(vf1),
+        "shuffled_f1": float(shuffled_f1),
+    }
+    return all(checks.values()), report
+
+
+def _emit_generated_arch(best: dict[str, Any]) -> Path:
+    """Write and syntax-check an isolated arch file; return its path (Layer C)."""
+    GENERATED.mkdir(parents=True, exist_ok=True)
+    (GENERATED / "__init__.py").touch()
+    tag = config_hash(best["config"])
+    path = GENERATED / f"arch_{tag}.py"
+    src = f'''"""AUTO-GENERATED by src/selfimprove/loop.py — do not edit by hand.
+
+Winning compact architecture from a self-improvement run. Isolated and
+test-gated: importing this never changes pipeline behaviour on its own.
+"""
+
+from __future__ import annotations
+
+from src.models.mlp import SharedMLP
+
+BEST = {{
+    "hidden_layers": {int(best["hidden_layers"])},
+    "hidden_width": {int(best["hidden_width"])},
+    "dropout": {float(best["dropout"])!r},
+    "macro_f1": {float(best["macro_f1"])!r},
+    "size_bytes": {int(best["size_bytes"])},
+}}
+
+
+def build(n_features: int, n_classes: int) -> SharedMLP:
+    """Instantiate the winning compact SharedMLP."""
+    return SharedMLP(
+        n_features=n_features,
+        n_classes=n_classes,
+        hidden_layers=int(BEST["hidden_layers"]),
+        hidden_width=int(BEST["hidden_width"]),
+        dropout=BEST["dropout"],
+    )
+'''
+    compile(src, str(path), "exec")  # guard: never write code that won't parse
+    path.write_text(src, encoding="utf-8")
+    return path
+
+
+def _git_commit(paths: list[Path], msg: str) -> None:
+    """Best-effort git add+commit of the generated/config artifacts (Layer B/C).
+
+    Commits ONLY ``paths`` (pathspec form): a plain ``git commit`` would also sweep
+    in whatever the user happened to have staged."""
+    if (ROOT / ".no_autocommit").exists():  # owner opted out (unattended runs)
+        _log.info("auto-commit disabled (.no_autocommit); files written, not committed")
+        return
+    try:
+        # gitignored paths (artifacts/ is) fail `git add` and dropped the whole commit
+        files = [
+            str(p)
+            for p in paths
+            if subprocess.run(
+                ["git", "check-ignore", "-q", str(p)], cwd=ROOT, capture_output=True
+            ).returncode
+            != 0
+        ]
+        if not files:
+            return
+        subprocess.run(
+            ["git", "add", "--", *files], cwd=ROOT, check=True, capture_output=True
+        )
+        subprocess.run(
+            ["git", "commit", "-m", msg, "--", *files],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+        _log.warning("git commit skipped (%s)", exc)
+
+
+def _read_auto() -> dict[str, Any]:
+    try:
+        doc = yaml.safe_load(AUTO_YAML.read_text(encoding="utf-8")) or {}
+    except (OSError, yaml.YAMLError):
+        return {}
+    return doc if isinstance(doc.get("datasets"), dict) else {}
+
+
+def auto_model(dataset: str) -> dict[str, Any] | None:
+    """The promoted arch for ``dataset`` from auto.yaml, or None (none promoted).
+
+    Per dataset: an arch searched on one dataset (e.g. the tiny fixture) must never
+    size the model trained on another."""
+    entry = _read_auto().get("datasets", {}).get(dataset)
+    return dict(entry["model"]) if entry and "model" in entry else None
+
+
+def _write_auto_yaml(best: dict[str, Any], dataset: str) -> None:
+    """Layer B: persist the winning arch as the next run's search centre."""
+    doc = _read_auto() or {"datasets": {}}
+    doc["datasets"][dataset] = {
+        "model": {
+            "hidden_layers": int(best["hidden_layers"]),
+            "hidden_width": int(best["hidden_width"]),
+            "dropout": float(best["dropout"]),
+        },
+        "provenance": {
+            "macro_f1": float(best["macro_f1"]),
+            "val_macro_f1": float(best["val_macro_f1"]),
+            "size_bytes": int(best["size_bytes"]),
+        },
+    }
+    AUTO_YAML.write_text(yaml.safe_dump(doc, sort_keys=False), encoding="utf-8")
+
+
+def _prev_best_f1(dataset: str) -> float:
+    """Standing promoted best (validation macro-F1) for THIS dataset only."""
+    if LEADERBOARD.exists():
+        rows = json.loads(LEADERBOARD.read_text(encoding="utf-8"))
+        promoted = [
+            r["val_macro_f1"]
+            for r in rows
+            if r.get("promoted") and r.get("dataset") == dataset and "val_macro_f1" in r
+        ]
+        return max(promoted) if promoted else -1.0
+    return -1.0
+
+
+def improve(
+    dataset: str = "cicids2017-improved",
+    n_trials: int = 6,
+    fast: bool = False,
+    device: str = "cpu",
+    size_budget_bytes: int = 2_000_000,
+    floor_frac: float = 0.98,
+    seed: int = 0,
+    use_usl: bool = False,
+    use_continual: bool = False,
+    use_hpo: bool = False,
+) -> dict[str, Any]:
+    """Run one self-improvement pass. Returns the leaderboard row that was written.
+
+    Sequence: supervised teacher -> RL-guided compression search (a gradient-bandit
+    picks which compact students to distil, reward = macro-F1 - size penalty) ->
+    full validation gate on the winner. A candidate is promoted iff it (1) passes
+    ``validate_output`` (finite logits, well-formed predictions, macro-F1 >= floor,
+    no shuffled-label leak), (2) fits the size budget, and (3) beats the standing
+    promoted best. ``n_trials`` is the number of RL episodes.
+    """
+    cfg = build_config(experiment_for_dataset(dataset, fast), seed=seed, fast=fast)
+    data = _load_data(cfg)
+    n_classes = len(data.label_names)
+    t0 = time.time()
+
+    def val_f1(model: Any) -> float:
+        return eval_macro_f1(model, data.X_val, data.y_val, n_classes, device)
+
+    # Optional USL pretraining: autoencoder warm-start for the teacher (default off).
+    init_state = unsupervised_pretrain(data, cfg, device) if use_usl else None
+
+    # A0: teacher (the standard SharedMLP) is the accuracy reference. Selection
+    # (floor, reward, winner, promotion) uses VALIDATION macro-F1; test macro-F1 is
+    # only reported, so the test set never steers which model is kept.
+    teacher, _, tm = train_centralized(data, cfg, device, init_state=init_state)
+    teacher_f1 = float(tm["macro_f1"])
+    teacher_val = val_f1(teacher)
+    teacher_size = state_dict_bytes(teacher)
+    floor = floor_frac * teacher_val
+
+    gate_ok, shuffled_f1 = shuffled_label_ok(data, cfg, device)
+
+    # A1: RL-guided compression search. Each architecture is an action; the reward
+    # rewards accuracy and penalises size. The bandit concentrates the trial budget
+    # on small-yet-accurate students instead of sweeping the whole grid.
+    actions = sample_archs(
+        999, seed, max_width=cfg.model.hidden_width, max_layers=cfg.model.hidden_layers
+    )
+    controller = GradientBanditController(len(actions), seed=seed)
+    candidates: list[dict[str, Any]] = [
+        {
+            "hidden_layers": cfg.model.hidden_layers,
+            "hidden_width": cfg.model.hidden_width,
+            "dropout": cfg.model.dropout,
+            "macro_f1": teacher_f1,
+            "val_macro_f1": teacher_val,
+            "size_bytes": teacher_size,
+            "latency_ms": latency_ms(teacher, data.X_test[:256], device),
+            "is_teacher": True,
+            "_model": teacher,  # a teacher win is promoted/deployed like any other
+        }
+    ]
+    for _ in range(n_trials):
+        a = controller.select()
+        arch = actions[a]
+        student, _ = distill_to_width(
+            teacher,
+            data,
+            cfg,
+            device,
+            int(arch["hidden_layers"]),
+            int(arch["hidden_width"]),
+            float(arch["dropout"]),
+        )
+        vf1 = val_f1(student)
+        size = state_dict_bytes(student)
+        # reward in ~[0,1]: accuracy minus a size penalty relative to the budget
+        reward = vf1 - 0.5 * min(1.0, size / max(1, size_budget_bytes))
+        controller.update(a, reward)
+        candidates.append(
+            {
+                **arch,
+                "macro_f1": eval_macro_f1(
+                    student, data.X_test, data.y_test, n_classes, device
+                ),
+                "val_macro_f1": float(vf1),
+                "size_bytes": size,
+                "latency_ms": latency_ms(student, data.X_test[:256], device),
+                "reward": float(reward),
+                "is_teacher": False,
+                "_model": student,
+            }
+        )
+
+    # Selection: qualifying = fits budget AND clears the accuracy floor. Smallest wins.
+    qualifying = [
+        c
+        for c in candidates
+        if c["size_bytes"] <= size_budget_bytes and c["val_macro_f1"] >= floor
+    ]
+    best = (
+        min(qualifying, key=lambda c: c["size_bytes"])
+        if qualifying
+        else max(candidates, key=lambda c: c["val_macro_f1"])
+    )
+
+    # Optional hyperparameter fine-tune around the winner (default off).
+    if use_hpo:
+        from src.selfimprove.hpo import hpo_finetune
+
+        center = replace(
+            cfg,
+            model=replace(
+                cfg.model,
+                hidden_width=int(best["hidden_width"]),
+                hidden_layers=int(best["hidden_layers"]),
+                dropout=float(best["dropout"]),
+            ),
+        )
+        tuned = hpo_finetune(center, data, device, size_budget_bytes=size_budget_bytes)
+        if tuned is not None and tuned["val_macro_f1"] > best["val_macro_f1"]:
+            best = {
+                **best,
+                "hidden_width": tuned["hidden_width"],
+                "hidden_layers": tuned["hidden_layers"],
+                "dropout": tuned["dropout"],
+                "macro_f1": tuned["macro_f1"],
+                "val_macro_f1": tuned["val_macro_f1"],
+                "size_bytes": tuned["size_bytes"],
+                "_model": tuned["model"],
+                "is_teacher": False,
+            }
+
+    # Full validation gate: the promoted model's OUTPUT must be valid, not just small.
+    best_model = best["_model"]
+    valid, validation = validate_output(
+        best_model, data, cfg, device, floor, gate_ok, shuffled_f1
+    )
+
+    promoted = bool(
+        valid
+        and best["size_bytes"] <= size_budget_bytes
+        and best["val_macro_f1"] > _prev_best_f1(dataset)
+    )
+    best_cfg = replace(
+        cfg,
+        model=replace(
+            cfg.model,
+            hidden_layers=int(best["hidden_layers"]),
+            hidden_width=int(best["hidden_width"]),
+            dropout=float(best["dropout"]),
+        ),
+    )
+    best_row = {
+        "dataset": dataset,
+        "hidden_layers": int(best["hidden_layers"]),
+        "hidden_width": int(best["hidden_width"]),
+        "dropout": float(best["dropout"]),
+        "macro_f1": float(best["macro_f1"]),
+        "val_macro_f1": float(best["val_macro_f1"]),
+        "teacher_macro_f1": teacher_f1,
+        "is_teacher": bool(best["is_teacher"]),
+        "size_bytes": int(best["size_bytes"]),
+        "teacher_size_bytes": int(teacher_size),
+        "shuffled_label_f1": shuffled_f1,
+        "gate_ok": gate_ok,
+        "valid": valid,
+        "validation": validation,
+        "promoted": promoted,
+        "elapsed_s": round(time.time() - t0, 1),
+        "config": best_cfg,  # for config_hash in Layer C; dropped before JSON
+    }
+
+    if promoted:
+        _promote(best, best_cfg, best_row, device)
+
+    # Optional continual-learning hook (default off).
+    if use_continual:
+        continual_update(best_model, data, cfg, device)
+
+    _append_leaderboard(best_row)
+    _log.info(
+        "self-improve: teacher F1=%.3f size=%dB -> best F1=%.3f size=%dB promoted=%s",
+        teacher_f1,
+        teacher_size,
+        best["macro_f1"],
+        best["size_bytes"],
+        promoted,
+    )
+    return {k: v for k, v in best_row.items() if k != "config"}
+
+
+def _promote(
+    best: dict[str, Any], best_cfg: Config, best_row: dict[str, Any], device: str
+) -> None:
+    """Save the compact + quantised model and write Layers B and C."""
+    import torch
+
+    out = best_dir(best_row["dataset"])
+    out.mkdir(parents=True, exist_ok=True)
+    model = best["_model"]
+    torch.save(model.state_dict(), out / "model.pt")
+    # quantize a copy: quantize_dynamic moves the model to CPU in place, and the
+    # caller keeps using the float model (continual hook) on its own device
+    import copy
+
+    q = dynamic_quantize(copy.deepcopy(model))
+    torch.save(q.state_dict(), out / "model_int8.pt")
+    best_row["size_bytes_int8"] = state_dict_bytes(q)
+    (out / "meta.json").write_text(
+        json.dumps(
+            {k: v for k, v in best_row.items() if k not in ("config", "_model")},
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    arch_path = _emit_generated_arch({**best, "config": best_cfg})
+    _write_auto_yaml(best, best_row["dataset"])
+    _git_commit(
+        [arch_path, AUTO_YAML, out / "meta.json"],
+        f"self-improve: promote {best['hidden_width']}w/{best['hidden_layers']}L "
+        f"F1={best['macro_f1']:.3f} size={best['size_bytes']}B",
+    )
+
+
+def _append_leaderboard(row: dict[str, Any]) -> None:
+    LEADERBOARD.parent.mkdir(parents=True, exist_ok=True)
+    rows = (
+        json.loads(LEADERBOARD.read_text(encoding="utf-8"))
+        if LEADERBOARD.exists()
+        else []
+    )
+    rows.append({k: v for k, v in row.items() if k not in ("config", "_model")})
+    LEADERBOARD.write_text(json.dumps(rows, indent=2), encoding="utf-8")
