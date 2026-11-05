@@ -1,7 +1,7 @@
 # Optional. Every import of these is guarded by try/except ImportError; absence
 # must not break Tasks 0-10.
 xgboost==2.1.1
-lightgbm==4.5.0
+lightgbm==4.6.0
 
 # Windows iGPU (DirectML) backend. Pin torch to a version with a matching
 # torch-directml wheel; keep it aligned with requirements.txt torch version.
