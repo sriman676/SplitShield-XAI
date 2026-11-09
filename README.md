@@ -1,9 +1,20 @@
 # 🛡️ SplitShield-XAI
 
-![Python](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-778%20passing-brightgreen)
-![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-informational)
-![License](https://img.shields.io/badge/license-MIT-blue)
+**Your SIEM shows alerts. SplitShield-XAI shows the attack.**
+
+<p align="center">
+  <a href="assets/splitshield-demo.mp4" title="Click to play the full video">
+    <img src="assets/splitshield-demo.gif" alt="SplitShield-XAI — 21-second demo video" width="760">
+  </a>
+</p>
+<p align="center"><sub>▶ The preview loops on its own; <a href="assets/splitshield-demo.mp4">click it to play the full video with sound</a>.</sub></p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white" alt="Python 3.12">
+  <img src="https://img.shields.io/badge/tests-778%20passing-brightgreen" alt="Tests: 778 passing">
+  <img src="https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-informational" alt="Windows, macOS, Linux">
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license">
+</p>
 
 **An explainable detection and response layer that works next to your SIEM.** It finds
 attacks in network traffic, logs, web requests, URLs, files, industrial sensors and user
