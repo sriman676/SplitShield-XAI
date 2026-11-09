@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import random
+import time
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
@@ -84,12 +85,16 @@ def _all(path: Path) -> list[dict]:
     return [json.loads(x) for x in path.read_text("utf-8").splitlines()]
 
 
+# "after <clock>" is read in local time: a fixed "3 pm" missed every event on a UTC
+# CI runner (17 < 18 hits) but not on a UTC+5:30 PC, so use the hour NOW falls in
+CLOCK = time.strftime("%I %p", time.localtime(NOW)).lower()
+
 QUERIES = [
     "failed logins", "show failed logins for bob", '"failed password"', "find powershell -enc",
     "events from 10.0.0.3", "events on host ws", "list T1110 events", "show alerts",
     "credential-access events", "zeek events", "events from sysmon", "show mimikatz",
     "events with ok", "logins from 10.0.0.1", "show processes on host SRV-DB",
-    "events after 3 pm", "show T1059 alerts on host ws01", "find c:\\temp", "find " + "a" * 64,
+    "events after " + CLOCK, "show T1059 alerts on host ws01", "find c:\\temp", "find " + "a" * 64,
     "show events", "find 404", "search x.dll",
 ]  # fmt: skip
 
