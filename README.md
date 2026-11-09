@@ -10,6 +10,12 @@ attacks in network traffic, logs, web requests, URLs, files, industrial sensors 
 activity, links them into incidents along the MITRE ATT&CK chain, explains each one in plain
 English and forwards it to your SIEM. It is a SIEM companion, not a SIEM replacement.
 
+## 🎬 Demo
+
+[![SplitShield-XAI in 20 seconds (click for the full video with sound)](assets/splitshield-demo.gif)](assets/splitshield-demo.mp4)
+
+▶️ [Watch the full video with sound (MP4, 21 s)](assets/splitshield-demo.mp4)
+
 ## ✨ Features
 
 - **Detection everywhere:** 9 models (network flows, NetFlow, Zeek, phishing, malware,
